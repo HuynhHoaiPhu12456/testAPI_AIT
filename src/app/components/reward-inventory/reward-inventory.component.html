@@ -1,0 +1,299 @@
+<br>
+<h1 style="text-align: center;">REWARD INVENTORY</h1>
+<br>
+    <button class="search-button" nbButton size="small" status="primary" shape="round" style="float: right;">New</button>
+<br>
+<br>
+<br>
+<nb-card class="inventory-card">
+    <nb-card-header>
+      <h3>Search Reward Inventory
+        <button nbButton status="default" style="float: right;">
+          <nb-icon *ngIf="!isCard" (click)="toggleCard()" icon="arrow-ios-downward-outline"></nb-icon>
+          <nb-icon *ngIf="isCard" (click)="toggleCard()" icon="arrow-ios-upward-outline"></nb-icon>
+        </button>
+
+      </h3>
+
+    </nb-card-header>
+    <nb-card-body *ngIf="isCard" [formGroup]="searchForm">
+      
+      <div class="container">
+
+        <div class="row">
+          <div class="col-md-1" style="margin-right: 10px;">
+            <p>Name</p>
+            <input nbInput type="text" placeholder="Please input name" fullWidth formControlName="name" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-1" style="margin-right: 10px;">
+            <p>Type</p>
+            <nb-select placeholder="Please select type" fullWidth formControlName="type" >
+              <nb-option value="01">Others</nb-option>
+              <nb-option value="02">Point</nb-option>
+              <nb-option value="03">Voucher/Coupon</nb-option>
+              <nb-option value="04">Course</nb-option>
+              <nb-option value="05">Ticket</nb-option>
+            </nb-select>
+          </div>
+        </div>
+
+      </div>
+            
+<!--       <p>Description</p>
+      <textarea nbInput fullWidth placeholder="Please input description"></textarea> -->
+
+      <div class="container">
+
+        
+
+        <div class="row">
+          <div class="col-md-1" style="margin-right: 10px">
+            <p>Price</p>
+            <input nbInput type="number" placeholder="Please input price" fullWidth formControlName="price"/>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-1">
+            <p>Total</p>
+            <input nbInput type="number" placeholder="Please input total" fullWidth formControlName="total"/>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container">
+        
+        <div class="row">
+          <div class="col-md-1" style="margin-right: 10px">
+            <p>Shipping</p>
+            <input nbInput type="number" placeholder="Please input shipping" fullWidth formControlName="shipping"/>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-1">
+            <p>Sold</p>
+            <input nbInput type="number" placeholder="Please input sold" fullWidth formControlName="sold"/>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container">
+        
+        <div class="row">
+          <div class="col-md-1" style="margin-right: 10px">
+            <p>Approve</p>
+            <nb-select placeholder="Approve" fullWidth formControlName="is_approve">
+              <nb-option [value]="true">Approved</nb-option>
+              <nb-option [value]="false">Not Approved</nb-option>
+            </nb-select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-1">
+            <p>Activate</p>
+            <nb-select placeholder="Activate" fullWidth formControlName="active_flag" >
+              <nb-option [value]="true">Activated</nb-option>
+              <nb-option [value]="false">Not Activated</nb-option>
+            </nb-select>
+          </div>
+        </div>
+
+      </div>
+      
+<!--       <p>Images</p>
+      <input nbInput type="text" placeholder="Please input url image" fullWidth /> -->
+
+      <br>
+      <br>
+
+      <div style="float: right;">
+      <button class="btn-cancel" class="search-button" size="small" nbButton shape="round" status="primary" (click)="resetSearchForm()">
+        Reset
+      </button>
+      <button style="margin-left: 10px" class="search-button" size="small" nbButton shape="round" status="primary" (click)="searchRewardInventory()">
+        Search
+      </button>
+    </div>
+    </nb-card-body>
+<!--     <nb-card-footer>
+      <button class="btn-cancel" nbButton status="default" >
+        Clear
+      </button>
+      <button style="margin-left: 10px" class="btn-submit" nbButton status="default">
+        Search
+      </button>
+    </nb-card-footer> -->
+  </nb-card>
+
+
+
+
+
+<nb-card>
+
+    <nb-card-header>
+        REWARD INVENTORY
+    </nb-card-header>
+
+    <nb-card-body>
+        <table id="customers" style="border-collapse: collapse;">
+            <tr>
+                <th style="width: 110px;">ACTION</th>
+                <th style="width: 200px;">NAME</th>
+                <th style="width: 110px;">TYPE</th>
+                <th style="width: 110px;">PRICE</th>
+                <th style="width: 110px;">TOTAL</th>
+                <th style="width: 130px;">SHIPPING</th>
+                <th style="width: 110px;">SOLD</th>
+                <th style="width: 110px;">APPROVE</th>
+                <th style="width: 110px;">ACTIVEFLAG</th>
+                <!-- <th style="width: 110px;">IMAGE</th> -->
+            </tr>
+            <tr>
+                <th></th>
+                <th>
+                    <form class="search-by" (keyup)="searchRewardInventory()" [formGroup]="searchForm">
+                        <input
+                          id="search-by-name"
+                          type="text"
+                          name="selectbyName"
+                        
+                        formControlName="name"
+                          class="search-input"
+                          nbInput
+                          fieldSize="small"
+                          placeholder="Name"
+                        />
+                      </form>
+                </th>
+
+                <th>
+                    <form class="search-by" [formGroup]="searchForm">
+                        <nb-select placeholder="Search By Type" size="small" class="search-input" formControlName="type">
+                            <nb-option value="01">Others</nb-option>
+                            <nb-option value="02">Point</nb-option>
+                            <nb-option value="03">Voucher/Coupon</nb-option>
+                            <nb-option value="04">Course</nb-option>
+                            <nb-option value="05">Ticket</nb-option>
+                          </nb-select>
+                      </form>
+                </th>
+                <th>
+                    <form class="search-by" [formGroup]="searchForm">
+                        <input
+                          id="search-by-price"
+                          type="number"
+                          class="search-input"
+                          nbInput
+                          fieldSize="small"
+                          placeholder="Price"
+                          formControlName="price"
+                        />
+                      </form>
+                </th>
+                <th>
+                    <form class="search-by" [formGroup]="searchForm">
+                        <input
+                          id="search-by-total"
+                          type="number"
+                          class="search-input"
+                          nbInput
+                          fieldSize="small"
+                          placeholder="Total"
+                          formControlName="total"
+                        />
+                      </form>
+                </th>
+                <th>
+                    <form class="search-by" [formGroup]="searchForm">
+                        <input
+                          id="search-by-shipping"
+                          type="number"
+                          class="search-input"
+                          nbInput
+                          fieldSize="small"
+                          placeholder="Shipping"
+                          formControlName="shipping"
+                        />
+                      </form>
+                </th>
+                <th>
+                    <form class="search-by" [formGroup]="searchForm">
+                        <input
+                          id="search-by-sold"
+                          type="number"
+                          class="search-input"
+                          nbInput
+                          fieldSize="small"
+                          placeholder="Sold"
+                          formControlName="sold"
+                        />
+                      </form>
+                </th>
+                <th>
+                  <form class="search-by-approve" [formGroup]="searchForm">
+                    <nb-select placeholder="Approve" size="small" class="search-input">
+                        <nb-option [value]="true">Approved</nb-option>
+                        <nb-option  [value]="false">Not Approved</nb-option>
+                    </nb-select>
+                  </form>
+                </th>
+                <th>
+                  <form class="search-by" [formGroup]="searchForm">
+                    <nb-select placeholder="Active" size="small" class="search-input">
+                        <nb-option [value]="true">Activated</nb-option>
+                        <nb-option [value]="false">Not Activated</nb-option>
+                    </nb-select>
+                  </form>
+                </th>
+                <!-- <th></th> -->
+            </tr>
+              <tr *ngFor="let reward of reward_inventor" >
+
+    
+        <td> 
+            <nb-icon style="cursor: pointer; margin-right: 25px; margin-left: 15px;"
+                title="Nhấn vào để chỉnh sửa" icon="edit-2-outline" status="danger" size="tiny"></nb-icon>
+
+              <nb-icon style="cursor: pointer;"
+              title="Nhấn vào để xóa" icon="trash-2-outline" status="danger" size="tiny"></nb-icon>    
+        </td>
+ 
+                
+
+                <td>{{reward.name}}</td>
+        
+                <td *ngIf="reward.type === '01'" >Others </td>
+                <td *ngIf="reward.type === '02'" >Point</td>
+                <td *ngIf="reward.type === '03'" >Voucher/Coupon</td>
+                <td *ngIf="reward.type === '04'" >Course</td>
+                <td *ngIf="reward.type === '05'" >Ticket</td>
+            
+        
+                <td>{{reward.price}}</td>
+                <td>{{reward.total}}</td>
+                <td>{{reward.shipping}}</td>
+                <td>{{reward.sold}}</td>
+
+                <td *ngIf="reward.is_approve === true">Approved</td>
+                <td *ngIf="reward.is_approve === false">Not Approved</td>
+
+                <td *ngIf="reward.active_flag === true">Activated</td>
+                <td *ngIf="reward.active_flag === false">Not Activated</td>
+                <!-- <td>
+                  <img *ngIf="reward.image" src="{{reward.image}}" height="20">
+                </td> -->
+              </tr>
+        </table>
+        <br>
+    </nb-card-body>
+</nb-card>
+
+

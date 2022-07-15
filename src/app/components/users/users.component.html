@@ -1,0 +1,79 @@
+<!-- <div class="users" *ngIf="users">
+    <div *ngFor="let user of users">
+        <p> {{user.email}} -- {{user.name}} -- {{user.password}} -- {{user.username}}</p>
+    </div>     
+</div> -->
+<!-- <ul *ngFor="let user of users">
+    <li> {{user._id}}</li>
+    <li>{{user.email}}</li>
+    <li>{{user.name}}</li>
+    <li>{{user.password}}</li>
+    <li> {{user.username}}</li>
+</ul> -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="search-container">
+    <form class="search-form">
+      <input
+        id="search-id"
+        type="text"
+        class="search-input"
+        name="selectedUserName"
+        [(ngModel)]="selectedUserName"
+        placeholder="Search UserName"
+      />
+      <button class="search-button" (click)="SearchByUserNameKeyWord()">Search</button>
+    </form>
+  </div>
+
+<table id="customers" style="border-collapse: collapse;">
+    <tr>
+        <th>Id</th>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Password</th>
+        <th>UserName</th>
+        <th>Thao tác</th>
+    </tr>
+      <tr *ngFor="let user of users" >
+        <td>{{user._id}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.password}}</td>
+        <td>{{user.username}}</td>
+        <td> 
+          <button nbButton outline status="success">
+            <nb-icon style="cursor: pointer"
+            title="Nhấn vào để chỉnh sửa" icon="edit-2-outline" status="danger" size="tiny" (click)="OpenEditDialog()"></nb-icon>
+          </button>
+          <button nbButton outline status="success">
+            <nb-icon style="cursor: pointer"
+            title="Nhấn vào để xóa" icon="trash-2-outline" status="danger" size="tiny" (click)="RemoveUser(user._id)"></nb-icon>
+          </button>
+        </td>
+      </tr>
+</table>
+<br>
+<button nbButton status="primary" (click)="open()">Register User</button>
+<br>
+
+<!-- <nb-card>
+  <nb-card-body>
+    <table [nbTreeGrid]="users"  equalColumnsWidth>
+     
+      <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+      <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+
+      <ng-container [nbTreeGridColumnDef]="column" *ngFor="let column of allColumns">
+        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{column}}</th>
+        <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row[column]}}</td>  
+      </ng-container>
+
+    </table>
+    
+  </nb-card-body>
+</nb-card> -->
+

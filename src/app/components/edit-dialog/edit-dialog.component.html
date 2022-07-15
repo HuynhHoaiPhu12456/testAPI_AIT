@@ -1,0 +1,18 @@
+<nb-card >
+    <nb-card-header>
+        Edit User
+    </nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="editForm">
+        <input nbInput type="text" placeholder="Password" fieldSize="medium" shape="rectangle"   formControlName="Password"> <br> <br>
+        <input nbInput type="text" placeholder="Name" fieldSize="medium" shape="rectangle"   formControlName="Name"> <br> <br>
+        <input nbInput type="text" placeholder="Email" fieldSize="medium" shape="rectangle"   formControlName="Email"> 
+        </form>
+    </nb-card-body>
+    <nb-card-footer >
+        <button nbButton status="danger" (click)="close()" class="cancel">Cancel</button>
+    
+        <button nbButton status="success" (click)=" UpdateUser()" [disabled]="!editForm.valid">Edit</button>
+
+    </nb-card-footer>
+</nb-card>

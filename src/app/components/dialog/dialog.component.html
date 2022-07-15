@@ -1,0 +1,20 @@
+
+<nb-card>
+    <nb-card-header>
+        Register NewUser
+    </nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm">
+        <input nbInput type="text" placeholder="UserName" fieldSize="medium" shape="rectangle"   formControlName="UserName"> <br> <br>
+        <input nbInput type="text" placeholder="Password" fieldSize="medium" shape="rectangle"   formControlName="Password"> <br> <br>
+        <input nbInput type="text" placeholder="Name" fieldSize="medium" shape="rectangle"   formControlName="Name"> <br> <br>
+        <input nbInput type="text" placeholder="Email" fieldSize="medium" shape="rectangle"   formControlName="Email"> 
+        </form>
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton status="danger" (click)="close()" class="cancel">Cancel</button>
+        <button nbButton status="success" (click)="RegisterUser()" [disabled]="!registerForm.valid">Submit</button>
+    </nb-card-footer>
+</nb-card>
+
+<h1>Hello world</h1>
