@@ -6,14 +6,14 @@
 <br>
 <br>
 <nb-card class="inventory-card">
-    <nb-card-header>
-      <h3>Search Reward Inventory
-        <button nbButton status="default" style="float: right;">
-          <nb-icon *ngIf="!isCard" (click)="toggleCard()" icon="arrow-ios-downward-outline"></nb-icon>
-          <nb-icon *ngIf="isCard" (click)="toggleCard()" icon="arrow-ios-upward-outline"></nb-icon>
-        </button>
+    <nb-card-header (click)="toggleCard()" style="cursor: pointer;">
+      <h5>Search Reward Inventory
+        <!-- <button nbButton status="default" style="float: right;"> -->
+          <nb-icon style="float: right; font-size: 1.2em;" *ngIf="!isCard" icon="arrow-ios-downward-outline"></nb-icon>
+          <nb-icon style="float: right; font-size: 1.2em;" *ngIf="isCard" icon="arrow-ios-upward-outline"></nb-icon>
+        <!-- </button> -->
 
-      </h3>
+      </h5>
 
     </nb-card-header>
     <nb-card-body *ngIf="isCard" [formGroup]="searchForm">
@@ -47,8 +47,6 @@
       <textarea nbInput fullWidth placeholder="Please input description"></textarea> -->
 
       <div class="container">
-
-        
 
         <div class="row">
           <div class="col-md-1" style="margin-right: 10px">
@@ -90,6 +88,7 @@
           <div class="col-md-1" style="margin-right: 10px">
             <p>Approve</p>
             <nb-select placeholder="Approve" fullWidth formControlName="is_approve">
+              <nb-option [value]="null">None</nb-option>
               <nb-option [value]="true">Approved</nb-option>
               <nb-option [value]="false">Not Approved</nb-option>
             </nb-select>
@@ -100,6 +99,7 @@
           <div class="col-md-1">
             <p>Activate</p>
             <nb-select placeholder="Activate" fullWidth formControlName="active_flag" >
+              <nb-option [value]="null">None</nb-option>
               <nb-option [value]="true">Activated</nb-option>
               <nb-option [value]="false">Not Activated</nb-option>
             </nb-select>
@@ -139,11 +139,18 @@
 
 <nb-card>
 
-    <nb-card-header>
-        REWARD INVENTORY
+    <nb-card-header (click)="toogleBelowCard()" style="cursor: pointer;">
+      
+        <h5>Reward Inventory
+          <!-- <button nbButton status="default" style="float: right; border: none; background: #fff"> -->
+            <nb-icon style="float: right; font-size: 1.2em;" *ngIf="!isBelowCard" icon="arrow-ios-downward-outline"></nb-icon>
+            <nb-icon style="float: right; font-size: 1.2em;" *ngIf="isBelowCard" icon="arrow-ios-upward-outline"></nb-icon>
+          <!-- </button> -->
+        </h5>
+       
     </nb-card-header>
 
-    <nb-card-body>
+    <nb-card-body *ngIf="isBelowCard" >
         <table id="customers" style="border-collapse: collapse;">
             <tr>
                 <th style="width: 110px;">ACTION</th>
@@ -154,18 +161,16 @@
                 <th style="width: 130px;">SHIPPING</th>
                 <th style="width: 110px;">SOLD</th>
                 <th style="width: 110px;">APPROVE</th>
-                <th style="width: 110px;">ACTIVEFLAG</th>
+                <th style="width: 110px;">ACTIVE</th>
                 <!-- <th style="width: 110px;">IMAGE</th> -->
             </tr>
             <tr>
                 <th></th>
                 <th>
-                    <form class="search-by" (keyup)="searchRewardInventory()" [formGroup]="searchForm">
-                        <input
+                    <form class="search-by" [formGroup]="searchForm" (keyup)="searchRewardInventory()">
+                        <input 
                           id="search-by-name"
                           type="text"
-                          name="selectbyName"
-                        
                         formControlName="name"
                           class="search-input"
                           nbInput
@@ -176,8 +181,8 @@
                 </th>
 
                 <th>
-                    <form class="search-by" [formGroup]="searchForm" (keyup)="searchRewardInventory()">
-                        <nb-select placeholder="Search By Type" size="small" class="search-input" formControlName="type">
+                    <form class="search-by" [formGroup]="searchForm">
+                        <nb-select placeholder="Search By Type" size="small" class="search-input" formControlName="type" (ngModelChange)="searchRewardInventory()">
                             <nb-option value="">None</nb-option>
                             <nb-option value="01">Others</nb-option>
                             <nb-option value="02">Point</nb-option>
@@ -240,16 +245,18 @@
                       </form>
                 </th>
                 <th>
-                  <form class="search-by-approve" [formGroup]="searchForm" >
-                    <nb-select placeholder="Approve" size="small" class="search-input">
+                  <form class="search-by-approve" [formGroup]="searchForm">
+                    <nb-select placeholder="Approve" size="small" class="search-input" formControlName="is_approve" (ngModelChange)="searchRewardInventory()">
+                        <nb-option [value]="null">None</nb-option>
                         <nb-option [value]="true">Approved</nb-option>
-                        <nb-option  [value]="false">Not Approved</nb-option>
+                        <nb-option [value]="false">Not Approved</nb-option>
                     </nb-select>
                   </form>
                 </th>
                 <th>
                   <form class="search-by" [formGroup]="searchForm">
-                    <nb-select placeholder="Active" size="small" class="search-input">
+                    <nb-select placeholder="Active" size="small" class="search-input" formControlName="active_flag" (ngModelChange)="searchRewardInventory()">
+                        <nb-option [value]="null">None</nb-option>
                         <nb-option [value]="true">Activated</nb-option>
                         <nb-option [value]="false">Not Activated</nb-option>
                     </nb-select>
@@ -261,6 +268,21 @@
 
     
         <td> 
+
+<!--             <nb-icon (click)="OpenOverlay(reward._id)" icon="more-horizontal-outline" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+            </nb-icon>
+
+            <ng-template
+              cdkConnectedOverlay
+              [cdkConnectedOverlayOrigin]="trigger"
+              [cdkConnectedOverlayOpen]="isOpenOverlay"
+            >
+              <ul class="example-list">
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+              </ul>
+            </ng-template> -->
             <nb-icon style="cursor: pointer; margin-right: 25px; margin-left: 15px;"
                 title="Nhấn vào để chỉnh sửa" icon="edit-2-outline" status="danger" size="tiny"></nb-icon>
 

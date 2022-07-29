@@ -1,0 +1,306 @@
+<br>
+<h1 style="text-align: center;">REWARD ORDER</h1>
+<br>
+    <button class="search-button" nbButton size="small" status="primary" shape="round" style="float: right;">New</button>
+<br>
+<br>
+<br>
+<nb-card class="inventory-card" >
+    <nb-card-header (click)="toggleCard()" style="cursor: pointer;">
+      <h5>Search Reward Order       
+          <nb-icon style="float: right; font-size: 1.2em;" *ngIf="!isCard" icon="arrow-ios-downward-outline"></nb-icon>
+          <nb-icon style="float: right; font-size: 1.2em;" *ngIf="isCard" icon="arrow-ios-upward-outline"></nb-icon>
+      </h5>
+    </nb-card-header>
+    <nb-card-body *ngIf="isCard" [formGroup]="searchOrderForm">
+      
+      <div class="container">
+
+        <div class="row">
+          <div class="col-md-1" style="margin-right: 10px;">
+            <p>User</p>
+            <!-- <input nbInput type="text" placeholder="Search by user id" fullWidth formControlName="userid" /> -->
+            <input 
+            id="search-by-name"
+            type="text"
+            formControlName="user"
+            fullWidth
+            class="search-input"
+            nbInput
+            placeholder="User Name"
+          />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-1" style="margin-right: 10px;">
+            <p>Reward</p>
+            <!-- <input nbInput type="text" placeholder="Search by reward name" fullWidth formControlName="rewardid" /> -->
+            <input 
+            id="search-by-name"
+            type="text"
+            formControlName="reward"
+            fullWidth
+            class="search-input"
+            nbInput
+            placeholder="Reward Name"
+          />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container">
+
+        <div class="row">
+          <div class="col-md-1" style="margin-right: 10px;">
+            <p>Status</p>
+            <nb-select style="width: 49.5%;" placeholder="Search by status" fullWidth formControlName="status" >
+              <nb-option value="">None</nb-option>
+              <nb-option value="01">New</nb-option>
+              <nb-option value="02">Approved</nb-option>
+              <nb-option value="03">Claimed</nb-option>
+            </nb-select>
+          </div>
+        </div>
+
+<!--         <div class="row">
+          <div class="col-md-1" style="margin-right: 10px;">
+            <p>Remask</p>
+            <input nbInput type="text" placeholder="Search by remask" fullWidth formControlName="remask"/>
+          </div>
+        </div> -->
+
+      </div>
+
+      <div class="container">
+        
+        <div class="row">
+          <div class="col-md-1" style="margin-right: 10px;">
+            <p>Search From Date</p>
+            <input nbInput placeholder="From Date" [nbDatepicker]="from" formControlName="from" fullWidth>
+            <nb-datepicker #from></nb-datepicker>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-1" style="margin-right: 10px;">
+            <p>Search To Date</p>
+            <input nbInput placeholder="To Date" [nbDatepicker]="to" formControlName="to" fullWidth>
+            <nb-datepicker #to></nb-datepicker>
+          </div>
+        </div>
+
+        <!-- <div class="row">
+          <div class="col-md-1">
+            <p>Approve At</p>
+            <input nbInput type="text" placeholder="Search by approve at" fullWidth formControlName="ApproveAt"/>
+          </div>
+        </div> -->
+
+      </div>
+
+      <br>
+      <br>
+
+      <div style="float: right;">
+      <button class="btn-cancel" class="search-button" size="small" nbButton shape="round" status="primary" (click)="resetSearchForm()">
+        Reset
+      </button>
+      <button style="margin-left: 10px" class="search-button" size="small" nbButton shape="round" status="primary" (click)="searchRewardOrder()">
+        Search
+      </button>
+    </div>
+    </nb-card-body>
+  </nb-card>
+
+
+  <nb-card>
+
+    <nb-card-header (click)="toogleBelowCard()" style="cursor: pointer;">
+        
+        <h5>
+          Reward Order
+          <nb-icon style="float: right; font-size: 1.2em;" *ngIf="!isBelowCard" icon="arrow-ios-downward-outline"></nb-icon>
+          <nb-icon style="float: right; font-size: 1.2em;" *ngIf="isBelowCard" icon="arrow-ios-upward-outline"></nb-icon>
+        </h5>
+        
+    </nb-card-header>
+
+    <nb-card-body *ngIf="isBelowCard" >
+        <table id="customers" style="border-collapse: collapse;">
+            <tr>
+                <th style="width: 120px;">ACTION</th>
+                <th>USER</th>
+                <th>REWARD INVENTORY</th>
+                <th>STATUS</th>
+                <th style="width: 300px">TIME REQUEST</th>
+                <th>REMARK</th>
+
+            </tr>
+            <tr>
+                <th></th>
+                <th>
+                    <!-- <form class="search-by" [formGroup]="searchOrderForm">
+                        <input
+                          id="search-by-username"
+                          type="text"
+                          name="selectbyName"
+                        
+                        formControlName="userid"
+                          class="search-input"
+                          nbInput
+                          fieldSize="small"
+                          placeholder="User ID"
+                        />
+                      </form> -->
+                      <form class="search-by" [formGroup]="searchOrderForm" (keyup)="searchRewardOrder()">
+                        <input 
+                        id="search-by-name"
+                        type="text"
+                      formControlName="user"
+                      fullWidth
+                        class="search-input"
+                        nbInput
+                        fieldSize="small"
+                        placeholder="User Name"
+                      />
+                      </form>
+                      
+                </th>
+                <th>
+<!--                   <form class="search-by" [formGroup]="searchOrderForm">
+                      <input
+                        id="search-by-name"
+                        type="text"
+                        name="selectbyName"
+                      
+                      formControlName="rewardid"
+                        class="search-input"
+                        nbInput
+                        fieldSize="small"
+                        placeholder="Reward ID"
+                      />
+                    </form> -->
+                    <form class="search-by" [formGroup]="searchOrderForm" (keyup)="searchRewardOrder()">
+                      <input 
+                      id="search-by-name"
+                      type="text"
+                    formControlName="reward"
+                    fullWidth
+                      class="search-input"
+                      nbInput
+                      fieldSize="small"
+                      placeholder="Reward Name"
+                    />
+                    </form>
+              </th>
+
+                <th>
+                    <form class="search-by" [formGroup]="searchOrderForm">
+                        <nb-select placeholder="Search By Status" size="small" class="search-input" formControlName="status" fullWidth formControlName="status" (ngModelChange)="searchRewardOrder()">
+                            <nb-option value="">None</nb-option>
+                            <nb-option value="01">New</nb-option>
+                            <nb-option value="02">Approved</nb-option>
+                            <nb-option value="03">Claimed</nb-option>
+                          </nb-select>
+                      </form>
+                </th>
+
+              <th>
+                <form class="search-by" [formGroup]="searchOrderForm" >
+                  <!-- <span>from</span> -->
+                  <input style="width: 45%" nbInput fieldSize="small" placeholder="From Date" [nbDatepicker]="from" formControlName="from" (ngModelChange)="searchRewardOrder()">
+                  <nb-datepicker #from></nb-datepicker>
+                  <span style="font-weight: normal;">&nbsp;to&nbsp;</span>
+                  <input style="width: 45%" nbInput fieldSize="small" placeholder="To Date" [nbDatepicker]="to" formControlName="to" (ngModelChange)="searchRewardOrder()">
+                  <nb-datepicker #to></nb-datepicker>
+                  </form>
+            </th>
+            <th>
+          </th>
+            </tr>
+
+              <tr *ngFor="let reward of reward_order" >
+
+        <td> 
+            <nb-icon style="cursor: pointer; margin-right: 25px; margin-left: 15px;"
+                title="Nhấn vào để chỉnh sửa" icon="edit-2-outline" status="default" size="tiny"></nb-icon>
+
+              <nb-icon style="cursor: pointer;"
+              title="Nhấn vào để xóa" icon="trash-2-outline" status="default" size="tiny"></nb-icon>    
+        </td>
+ 
+                
+
+                <td>{{reward.user_id.name}}</td>
+                
+                
+                <td >{{reward.reward_id?.name}} </td>
+
+                <td *ngIf="reward.status === '01'" >New </td>
+                <td *ngIf="reward.status === '02'" >Approved</td>
+                <td *ngIf="reward.status === '03'" >Claimed</td>
+            
+        
+                
+                <td>{{reward.create_at * 1000 | date:'dd/MM/yyyy (H:mm:ss)'}}</td>
+                <td>{{reward.remark}}</td>
+
+              </tr>
+        </table>
+        <br>
+    </nb-card-body>
+</nb-card>
+
+
+
+
+
+
+
+<!-- <br>
+<br>
+
+<table [nbTreeGrid]="reward_order" >
+
+  <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+  <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+
+  <ng-container nbTreeGridColumnDef="ACTION">
+    <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>ACTION</th>
+    <td nbTreeGridCell *nbTreeGridCellDef="let row">
+        <nb-icon style="cursor: pointer; margin-right: 25px; margin-left: 15px;"
+        title="Nhấn vào để chỉnh sửa" icon="edit-2-outline" status="default" size="tiny" (click)="Logdata(row)"></nb-icon>
+
+        <nb-icon style="cursor: pointer;"
+        title="Nhấn vào để xóa" icon="trash-2-outline" status="default" size="tiny"></nb-icon>   
+    </td>
+  </ng-container>
+
+  <ng-container nbTreeGridColumnDef="USER">
+    <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>USER</th>
+    <td nbTreeGridCell *nbTreeGridCellDef="let reward" >{{reward?.user_id}}</td>
+  </ng-container>
+
+  <ng-container nbTreeGridColumnDef="REWARD INVENTORY">
+    <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>REWARD INVENTORY</th>
+    <td nbTreeGridCell *nbTreeGridCellDef="let reward">{{reward?.reward_id}}</td>
+  </ng-container>
+
+  <ng-container nbTreeGridColumnDef="STATUS">
+    <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>STATUS</th>
+    <td nbTreeGridCell *nbTreeGridCellDef="let reward">{{reward?.status}}</td>
+  </ng-container>  
+  
+  <ng-container nbTreeGridColumnDef="TIME REQUEST">
+    <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>TIME REQUEST</th>
+    <td nbTreeGridCell *nbTreeGridCellDef="let reward">{{reward?.create_at * 1000 | date:'dd/MM/yyyy (H:mm:ss)'}}</td>
+  </ng-container>  
+
+  <ng-container nbTreeGridColumnDef="REMARK">
+    <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>REMARK</th>
+    <td nbTreeGridCell *nbTreeGridCellDef="let reward">{{reward | json}}</td>
+  </ng-container>
+
+</table> -->

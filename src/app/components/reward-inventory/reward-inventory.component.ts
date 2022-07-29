@@ -45,7 +45,9 @@ query(
   $PRICE:Float,
   $TOTAL:Float,
   $SHIPPING:Float,
-  $SOLD:Float
+  $SOLD:Float,
+  $ACTIVE_FLAG: Boolean,
+  $IS_APPROVE:Boolean
 )
 {
   searchRewardInventory(
@@ -56,6 +58,8 @@ query(
       total:$TOTAL,
       shipping:$SHIPPING,
       sold:$SOLD,
+      active: $ACTIVE_FLAG,
+      approve: $IS_APPROVE
       }){
     _id
     name
@@ -82,8 +86,8 @@ export class RewardInventoryComponent implements OnInit {
 
   selectbyName = '';
   isCard: boolean = true;
-  
-
+  isBelowCard: boolean = true;
+  isOpenOverlay: boolean = false;
   constructor(private apollo: Apollo,
     private fb: FormBuilder) { }
 
@@ -140,6 +144,8 @@ export class RewardInventoryComponent implements OnInit {
           TOTAL: this.searchForm.controls["total"].value,
           SHIPPING: this.searchForm.controls["shipping"].value,
           SOLD: this.searchForm.controls["sold"].value,
+          ACTIVE_FLAG: this.searchForm.controls["active_flag"].value,
+          IS_APPROVE: this.searchForm.controls["is_approve"].value,
         }
       })
       .valueChanges.subscribe((res: any) => {
@@ -149,8 +155,12 @@ export class RewardInventoryComponent implements OnInit {
       })
   }
 
-  toggleCard (){
+  toggleCard(){
     this.isCard = !this.isCard;
+  }
+
+  toogleBelowCard() {
+    this.isBelowCard = !this.isBelowCard;
   }
 
   resetSearchForm() {
@@ -158,5 +168,18 @@ export class RewardInventoryComponent implements OnInit {
     this.searchForm.reset();
     this.searchForm.get('name')?.reset('');
     this.searchForm.get('type')?.reset('');
+  }
+
+  OpenOverlay(id: string) {
+
+        if(id == this.onAddLicense(id)) {
+          this.isOpenOverlay = !this.isOpenOverlay;
+        }       
+
+  }
+
+  onAddLicense(output: string) {
+    console.log(output)
+    return output;
   }
 }

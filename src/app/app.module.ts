@@ -8,7 +8,7 @@ import { GraphQLModule } from './graphql.module';
 import { UsersComponent } from './components/users/users.component';
 import { EmployeeComponent } from './components/employee/employee.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbActionsModule, NbButtonModule, NbCardModule, NbDialogModule, NbIconModule, NbInputModule, NbLayoutModule, NbSelectModule, NbSidebarModule, NbThemeModule, NbTreeGridModule } from '@nebular/theme';
+import { NbActionsModule, NbButtonModule, NbCardModule, NbDatepickerModule, NbDialogModule, NbIconModule, NbInputModule, NbLayoutModule, NbSelectModule, NbSidebarModule, NbThemeModule, NbTreeGridModule } from '@nebular/theme';
 import { RouterModule } from '@angular/router';
 import { DialogComponent } from './components/dialog/dialog.component';
 import {DialogModule} from '@angular/cdk/dialog';
@@ -19,6 +19,12 @@ import { EditDialogComponent } from './components/edit-dialog/edit-dialog.compon
 
 import {CdkTableModule} from '@angular/cdk/table';
 import { RewardInventoryComponent } from './components/reward-inventory/reward-inventory.component';
+import { RewardOrderComponent } from './components/reward-order/reward-order.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +32,8 @@ import { RewardInventoryComponent } from './components/reward-inventory/reward-i
     EmployeeComponent,
     DialogComponent,
     EditDialogComponent,
-    RewardInventoryComponent
+    RewardInventoryComponent,
+    RewardOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -44,16 +51,20 @@ import { RewardInventoryComponent } from './components/reward-inventory/reward-i
     NbDialogModule.forRoot(),
     NbCardModule,
     NbDialogModule.forChild(),
+    NbDatepickerModule.forRoot(),
     DialogModule,
     NbInputModule,
     NbEvaIconsModule,
     NbSelectModule,
     NbIconModule,
     NbActionsModule,
+    NbTreeGridModule,
+
+    OverlayModule,
     CdkTableModule,
 
     /* Table */
-    NbTreeGridModule,
+    
     
   ],
   providers: [],
